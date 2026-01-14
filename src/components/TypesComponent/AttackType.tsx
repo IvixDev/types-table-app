@@ -13,17 +13,26 @@ const AttackType = ({ droppableId, attackType }: IAttackTypeProps) => {
     <Droppable droppableId={droppableId} direction='horizontal'>
       {provided => (
         <Stack
-          margin={{ md: 2, xs: 0 }}
-          height={80}
           alignItems='center'
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
           <Typography
-            sx={{ textShadow: theme.palette.mode === 'dark' ? '2px 2px 2px rgba(0,0,0,.3)' : '' }}
-            color={theme.palette.primary.contrastText}
+            variant="subtitle1"
+            fontWeight="bold"
+            noWrap
+            sx={{
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              color: theme.palette.text.primary,
+              textShadow: theme.palette.mode === 'dark' ? '2px 2px 4px rgba(0,0,0,0.5)' : 'none',
+              display: 'inline-block',
+              fontSize: '0.85rem',
+              whiteSpace: 'nowrap',
+              marginBottom: '8px'
+            }}
           >
-            El tipo de tu ataque
+            Tu tipo de ataque
           </Typography>
           <Stack
             direction='row'
@@ -31,12 +40,16 @@ const AttackType = ({ droppableId, attackType }: IAttackTypeProps) => {
             alignItems='center'
             marginBottom={1}
             overflow='auto'
-            width={145}
-            height={38}
-            minHeight={38}
-            border={`4px solid ${theme.palette.secondary.main}`}
+            width={160}
+            height={50}
+            minHeight={50}
+            border={`2px solid ${theme.palette.secondary.main}`}
             borderRadius='24px'
-            sx={{ '&::-webkit-scrollbar': { display: 'none' }, backgroundColor: theme.palette.primary.light }}
+            sx={{
+              '&::-webkit-scrollbar': { display: 'none' },
+              backgroundColor: theme.palette.background.paper,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            }}
           >
             {attackType && (
               <TypeItem key={attackType.id} {...attackType} index={0} listType={DroppableLists.ATTACKTYPE} />

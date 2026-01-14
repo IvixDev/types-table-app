@@ -6,10 +6,16 @@ export const darkTheme = createTheme({
     breakpoints,
     palette: darkPalette,
     spacing: 4,
+    typography: {
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    },
 })
 
 export const lightTheme = createTheme({
     breakpoints,
     palette: lightPalette,
     spacing: 4,
+    typography: {
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    },
 })

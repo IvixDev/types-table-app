@@ -9,13 +9,14 @@ const DamageIndicator = ({ damage }: { damage: number }) => {
 
   return (
     <Stack
-      width={{ sm: 490, xs: 1 }}
-      divider={<Divider variant='middle' orientation='vertical' />}
+      width={{ sm: 560, xs: 1 }}
       direction='row'
+      flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
       justifyContent='center'
       alignItems='center'
       marginY={2}
       paddingX={1}
+      gap={1}
     >
       {damageArray.map(damageIndicator => (
         <Typography
@@ -23,14 +24,22 @@ const DamageIndicator = ({ damage }: { damage: number }) => {
           display='flex'
           justifyContent='center'
           alignItems='center'
-          height={70}
-          width={80}
+          height={{ xs: 50, sm: 70 }}
+          width={{ xs: 60, sm: 80 }}
           sx={{
-            color: damage === damageIndicator ? theme.palette.common.white : theme.palette.common.black,
-            border: '1px solid black',
-            background: damage === damageIndicator ? getDamageColor(damageIndicator) : theme.palette.primary.light,
-            boxShadow: 'inset 3px 3px 3px rgba(255,255,255,.7), inset -2px -2px 2px -1px rgba(0,0,0,.7)',
-            textShadow: damage === damageIndicator ? '2px 2px 2px rgba(0,0,0,.3)' : 'none',
+            flexShrink: 0,
+            color: damage === damageIndicator ? theme.palette.common.white : theme.palette.text.primary,
+            border: `2px solid ${theme.palette.secondary.main}`,
+            borderRadius: '16px',
+            background: damage === damageIndicator ? getDamageColor(damageIndicator) : theme.palette.background.paper,
+            boxShadow: damage === damageIndicator
+              ? '0 4px 6px rgba(0,0,0,0.2)'
+              : 'none',
+            transition: 'all 0.2s ease',
+            textShadow: damage === damageIndicator ? '1px 1px 2px rgba(0,0,0,0.3)' : 'none',
+            fontWeight: 'bold',
+            fontFamily: '"Roboto Mono", monospace',
+            fontSize: { xs: '0.9rem', sm: '1.1rem' },
           }}
         >
           {`x${damageIndicator}`}

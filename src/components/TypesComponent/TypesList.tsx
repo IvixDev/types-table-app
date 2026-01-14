@@ -16,8 +16,17 @@ const TypesList = ({ droppableId, typesList }: IListProps) => {
         <>
           <Stack width={1} gap={1} padding={2} alignItems='center' ref={provided.innerRef} {...provided.droppableProps}>
             <Typography
-              sx={{ textShadow: theme.palette.mode === 'dark' ? '2px 2px 2px rgba(0,0,0,.3)' : '' }}
-              color={theme.palette.primary.contrastText}
+              variant="subtitle1"
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                color: theme.palette.text.primary,
+                textShadow: theme.palette.mode === 'dark' ? '2px 2px 4px rgba(0,0,0,0.5)' : 'none',
+                paddingBottom: '2px',
+                display: 'inline-block',
+              }}
             >
               Arrastra los tipos
             </Typography>
@@ -26,28 +35,33 @@ const TypesList = ({ droppableId, typesList }: IListProps) => {
               variant='outlined'
               placeholder='Buscar'
               onChange={search => setSearch(search.target.value)}
-              inputProps={{ style: { padding: '4px 12px 4px 12px' } }}
+              inputProps={{ style: { padding: '8px 16px' } }}
               InputProps={{
                 style: {
-                  color: theme.palette.primary.contrastText,
-                  backgroundColor: theme.palette.primary.light,
-                  width: 190,
-                  border: `4px solid ${theme.palette.secondary.main}`,
-                  borderRadius: '32px',
+                  color: theme.palette.text.primary,
+                  backgroundColor: theme.palette.background.paper,
+                  width: 220,
+                  border: `2px solid ${theme.palette.secondary.main}`,
+                  borderRadius: '24px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
                 },
               }}
             />
             <Stack
-              width={180}
+              width={220}
               maxHeight={410}
               alignItems='center'
               gap={1}
-              paddingY='8px'
-              paddingX='4px'
-              border={`4px solid ${theme.palette.secondary.main}`}
+              paddingY='12px'
+              paddingX='8px'
+              border={`2px solid ${theme.palette.secondary.main}`}
               borderRadius='24px'
               overflow='auto'
-              sx={{ '&::-webkit-scrollbar': { display: 'none' }, backgroundColor: theme.palette.primary.light }}
+              sx={{
+                '&::-webkit-scrollbar': { display: 'none' },
+                backgroundColor: theme.palette.background.paper,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+              }}
             >
               {typesList &&
                 typesList.length > 0 &&

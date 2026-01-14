@@ -1,6 +1,6 @@
 import { getTypeEffectiveness } from '@/helpers/typescomponent.helper'
 import { DroppableLists } from '@/utils/enums'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography, useTheme } from '@mui/material'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import AttackType from './AttackType'
@@ -33,8 +33,14 @@ const TypesComponent = ({ allTypesList }: { allTypesList: ITypeProps[] }) => {
         alignItems='center'
       >
         <TypesList droppableId={DroppableLists.TYPESLIST} typesList={typesList} />
-        <Stack alignItems='center' direction='column' width={{ sm: 600, xs: 1 }}>
-          <Stack direction={{ sm: 'row', xs: 'column' }} justifyContent='center'>
+        <Stack alignItems='center' direction='column' width={{ sm: 600, xs: 1 }} gap={2}>
+          <Stack
+            direction={{ sm: 'row', xs: 'column' }}
+            justifyContent='center'
+            alignItems={{ xs: 'center', sm: 'flex-start' }}
+            gap={2}
+            width={1}
+          >
             <AttackType droppableId={DroppableLists.ATTACKTYPE} attackType={attackType} />
             <EnemyTypesList droppableId={DroppableLists.ENEMYTYPELIST} typesList={enemyTypesList} />
           </Stack>
@@ -70,22 +76,34 @@ export const TypeItem = ({
             color: 'white',
             borderRadius: '30px',
             background: color,
-            boxShadow: 'inset 3px 3px 3px rgba(255,255,255,.7), inset -2px -2px 2px -1px rgba(0,0,0,.7)',
-            textShadow: '2px 2px 2px rgba(0,0,0,.3)',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.4)',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.6)',
             width: 140,
-            height: 32,
-            minHeight: 32,
+            height: 36,
+            minHeight: 36,
             display: 'flex',
             alignContent: 'center',
             justifyContent: 'center',
             alignItems: 'center',
             textTransform: 'uppercase',
+            cursor: 'grab',
+            fontWeight: 'bold',
+            letterSpacing: '1px',
             // styles we need to apply on draggables
             ...provided.draggableProps.style,
-            transitionDuration: `!important 0.0001s`,
+            transition: 'transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 6px 8px rgba(0,0,0,0.3)',
+            },
+            '&:active': {
+              cursor: 'grabbing',
+              transform: 'translateY(0)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+            }
           }}
         >
-          <Typography>{typeName}</Typography>
+          <Typography fontWeight="bold">{typeName}</Typography>
         </Box>
       )}
     </Draggable>
