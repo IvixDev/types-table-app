@@ -3,11 +3,15 @@ import { DroppableId } from "react-beautiful-dnd"
 export interface IListProps {
   droppableId: DroppableId
   typesList: ITypeProps[]
+  search?: string
+  setSearch?: (search: string) => void
+  onTypeClick?: (type: ITypeProps) => void
 }
 
 export interface IAttackTypeProps {
   droppableId: DroppableId
   attackType?: ITypeProps
+  onTypeClick?: (type: ITypeProps) => void
 }
 
 export interface EffectivenessItem {
@@ -78,4 +82,5 @@ export interface ITypeProps {
   move_damage_class: MoveDamageClass
   moves: Move[]
   pokemon: Pokemon[]
+  onClick?: (type: ITypeProps) => void
 }

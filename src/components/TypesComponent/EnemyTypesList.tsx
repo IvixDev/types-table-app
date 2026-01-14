@@ -6,12 +6,12 @@ import { ThemmeContext } from '../Layout/Layout'
 import { TypeItem } from './TypesComponent'
 import { IListProps } from './types/typeslist.types'
 
-const EnemyTypesList = ({ droppableId, typesList }: IListProps) => {
+const EnemyTypesList = ({ droppableId, typesList, onTypeClick }: IListProps) => {
   const theme = useContext(ThemmeContext)
 
   return (
     <Droppable droppableId={droppableId} direction='horizontal'>
-      {provided => (
+      {(provided, snapshot) => (
         <Stack
           alignItems='center'
           ref={provided.innerRef}
@@ -41,21 +41,26 @@ const EnemyTypesList = ({ droppableId, typesList }: IListProps) => {
             height={50}
             minHeight={50}
             width={320}
-            border={`2px solid ${theme.palette.secondary.main}`}
+            border={`2px ${snapshot.isDraggingOver ? 'dashed' : 'solid'} ${theme.palette.secondary.main}`}
             borderRadius='24px'
             overflow='auto'
             sx={{
               '&::-webkit-scrollbar': { display: 'none' },
-              backgroundColor: theme.palette.background.paper,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-              padding: '4px 16px'
+              backgroundColor: snapshot.isDraggingOver
+                ? (theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)')
+                : theme.palette.background.paper,
+              boxShadow: snapshot.isDraggingOver
+                ? '0 8px 24px rgba(0,0,0,0.1)'
+                : '0 4px 12px rgba(0,0,0,0.05)',
+              padding: '4px 16px',
+              transition: 'all 0.2s ease',
             }}
           >
             {typesList.map((type, index) => (
-              <TypeItem key={type.id} {...type} index={index} listType={DroppableLists.ENEMYTYPELIST} />
+              <TypeItem key={type.id} {...type} index={index} listType={DroppableLists.ENEMYTYPELIST} onClick={onTypeClick} />
             ))}
+            {provided.placeholder}
           </Stack>
-          {provided.placeholder}
         </Stack>
       )}
     </Droppable>
