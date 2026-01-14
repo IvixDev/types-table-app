@@ -99,7 +99,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                   transform: 'translateX(28px)',
                   color: '#fff',
                   '& + .MuiSwitch-track': {
-                    backgroundColor: theme.palette.mode === 'dark' ? '#475569' : '#94a3b8',
+                    backgroundColor: theme.palette.mode === 'dark' ? '#a18a00' : '#94a3b8',
                     opacity: 1,
                     border: 0,
                   },
@@ -107,9 +107,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
               },
               '& .MuiSwitch-track': {
                 borderRadius: 36 / 2,
-                backgroundColor: theme.palette.mode === 'dark' ? '#475569' : '#94a3b8',
+                backgroundColor: theme.palette.mode === 'dark' ? '#a18a00' : '#94a3b8',
                 opacity: 1,
-                border: `1px solid ${theme.palette.mode === 'dark' ? '#64748b' : '#cbd5e1'}`,
+                border: `1px solid ${theme.palette.mode === 'dark' ? '#857200' : '#cbd5e1'}`,
                 transition: theme.transitions.create(['background-color', 'border'], {
                   duration: 500,
                 }),
