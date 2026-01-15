@@ -13,7 +13,7 @@ const TypesList = ({ droppableId, typesList, search = '', setSearch, onTypeClick
     <Droppable droppableId={droppableId} direction='vertical'>
       {(provided, snapshot) => (
         <>
-          <Stack width={1} gap={1} padding={2} alignItems='center' ref={provided.innerRef} {...provided.droppableProps}>
+          <Stack width={{ xs: 1, sm: 'auto' }} gap={1} paddingX={2} paddingTop={0} paddingBottom={2} alignItems='center' ref={provided.innerRef} {...provided.droppableProps}>
             <Typography
               variant="subtitle1"
               fontWeight="bold"
@@ -25,6 +25,7 @@ const TypesList = ({ droppableId, typesList, search = '', setSearch, onTypeClick
                 textShadow: theme.palette.mode === 'dark' ? '2px 2px 4px rgba(0,0,0,0.5)' : 'none',
                 paddingBottom: '2px',
                 display: 'inline-block',
+                marginTop: '-8px' // Move title even higher
               }}
             >
               Arrastra los tipos
@@ -34,12 +35,12 @@ const TypesList = ({ droppableId, typesList, search = '', setSearch, onTypeClick
               variant='outlined'
               placeholder='Buscar'
               onChange={e => setSearch && setSearch(e.target.value)}
-              inputProps={{ style: { padding: '8px 16px' } }}
+              inputProps={{ style: { padding: '6px 12px', fontSize: '0.85rem' } }}
               InputProps={{
                 style: {
                   color: theme.palette.text.primary,
                   backgroundColor: theme.palette.background.paper,
-                  width: 220,
+                  width: 140,
                   border: `2px solid ${theme.palette.secondary.main}`,
                   borderRadius: '24px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
@@ -47,8 +48,8 @@ const TypesList = ({ droppableId, typesList, search = '', setSearch, onTypeClick
               }}
             />
             <Stack
-              width={220}
-              maxHeight={410}
+              width={140}
+              maxHeight={{ xs: 160, sm: 400, md: 450 }}
               alignItems='center'
               gap={1}
               paddingY='12px'

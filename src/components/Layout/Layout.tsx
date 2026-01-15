@@ -45,7 +45,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
         }}
       >
         <Stack
-          width={{ xs: '95%', sm: 600 }}
+          width={{ xs: '95%', sm: 1 }}
+          maxWidth={{ xs: '85%', xl: 1200 }}
           direction="row"
           justifyContent="flex-end"
           marginBottom={2}

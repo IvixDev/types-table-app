@@ -9,7 +9,7 @@ const DamageIndicator = ({ damage }: { damage: number }) => {
 
   return (
     <Stack
-      width={{ sm: 560, xs: 1 }}
+      width={{ sm: 500, xs: 1 }}
       direction='row'
       flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
       justifyContent='center'

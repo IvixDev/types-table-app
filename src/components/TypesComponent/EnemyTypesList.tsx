@@ -40,7 +40,8 @@ const EnemyTypesList = ({ droppableId, typesList, onTypeClick }: IListProps) => 
             direction='row'
             height={50}
             minHeight={50}
-            width={320}
+            justifyContent='center'
+            minWidth={260}
             border={`2px ${snapshot.isDraggingOver ? 'dashed' : 'solid'} ${theme.palette.secondary.main}`}
             borderRadius='24px'
             overflow='auto'

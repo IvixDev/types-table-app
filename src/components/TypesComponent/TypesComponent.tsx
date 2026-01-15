@@ -66,9 +66,10 @@ const TypesComponent = ({ allTypesList }: { allTypesList: ITypeProps[] }) => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Stack
         width={{ xs: 1, md: 'auto' }}
-        direction={{ md: 'row', sm: 'column' }}
+        direction={{ xs: 'column', md: 'row' }}
         justifyContent='center'
-        alignItems='center'
+        alignItems={{ xs: 'center', md: 'flex-start' }}
+        gap={{ xs: 3, md: 2.5 }}
       >
         <TypesList
           droppableId={DroppableLists.TYPESLIST}
@@ -77,26 +78,41 @@ const TypesComponent = ({ allTypesList }: { allTypesList: ITypeProps[] }) => {
           setSearch={setSearch}
           onTypeClick={handleTypeClick}
         />
-        <Stack alignItems='center' direction='column' width={{ sm: 600, xs: 1 }} gap={2}>
-          <Stack
-            direction={{ sm: 'row', xs: 'column' }}
-            justifyContent='center'
-            alignItems={{ xs: 'center', sm: 'flex-start' }}
-            gap={2}
-            width={1}
-          >
-            <AttackType
-              droppableId={DroppableLists.ATTACKTYPE}
-              attackType={attackType}
-              onTypeClick={handleRemoveAttackType}
-            />
-            <EnemyTypesList
-              droppableId={DroppableLists.ENEMYTYPELIST}
-              typesList={enemyTypesList}
-              onTypeClick={handleRemoveEnemyType}
-            />
+        <Stack
+          direction={{ xs: 'column', lg: 'row' }}
+          alignItems={{ xs: 'center', lg: 'flex-start' }}
+          gap={2.5}
+          sx={{
+            '@media (min-width: 1400px)': {
+              flexDirection: 'row',
+            },
+            '@media (max-width: 1399px)': {
+              flexDirection: 'column',
+              alignItems: 'center'
+            }
+          }}
+        >
+          <Stack alignItems='center' direction='column' width={{ sm: 'auto', xs: 1 }} gap={2}>
+            <Stack
+              direction={{ sm: 'row', xs: 'column' }}
+              justifyContent='center'
+              alignItems={{ xs: 'center', sm: 'flex-start' }}
+              gap={2.5}
+              width={1}
+            >
+              <AttackType
+                droppableId={DroppableLists.ATTACKTYPE}
+                attackType={attackType}
+                onTypeClick={handleRemoveAttackType}
+              />
+              <EnemyTypesList
+                droppableId={DroppableLists.ENEMYTYPELIST}
+                typesList={enemyTypesList}
+                onTypeClick={handleRemoveEnemyType}
+              />
+            </Stack>
+            <DamageIndicator damage={damage} />
           </Stack>
-          <DamageIndicator damage={damage} />
           <TypesEffectiveStatus enemyTypesList={enemyTypesList} typesList={typesList} />
         </Stack>
       </Stack>
@@ -105,8 +121,8 @@ const TypesComponent = ({ allTypesList }: { allTypesList: ITypeProps[] }) => {
 }
 
 export const TypeItem = (props: ITypeProps & { index: number; listType?: string; onClick?: (type: any) => void }) => {
-  const { id, name, names, color, index, listType, onClick } = props
-  const dragId = listType ? `${listType}-${name}` : name
+  const { id, names, color, index, listType, onClick } = props
+  const dragId = listType ? `${listType}-${props.name}` : props.name
   const typeName = names.find(name => name.language.name === 'es')?.name
 
   return (
@@ -122,12 +138,12 @@ export const TypeItem = (props: ITypeProps & { index: number; listType?: string;
             borderRadius: '30px',
             background: color,
             boxShadow: snapshot.isDragging
-              ? '0 10px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.4)'
-              : '0 4px 6px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.4)',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.6)',
-            width: 140,
-            height: 36,
-            minHeight: 36,
+              ? '0 10px 20px rgba(0,0,0,0.3)'
+              : '0 4px 6px rgba(0,0,0,0.2)',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.4)',
+            width: 110,
+            height: 34,
+            minHeight: 34,
             display: 'flex',
             alignContent: 'center',
             justifyContent: 'center',
@@ -135,8 +151,9 @@ export const TypeItem = (props: ITypeProps & { index: number; listType?: string;
             textTransform: 'uppercase',
             cursor: snapshot.isDragging ? 'grabbing' : (onClick ? 'pointer' : 'grab'),
             fontWeight: 'bold',
-            letterSpacing: '1px',
+            letterSpacing: '1.2px',
             userSelect: 'none',
+            fontSize: '0.8rem',
             ...provided.draggableProps.style,
             transform: snapshot.isDragging
               ? `${provided.draggableProps.style?.transform} scale(1.05)`
