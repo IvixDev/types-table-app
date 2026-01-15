@@ -143,7 +143,7 @@ const TypesEffectiveStatus = ({
               </Box>
             ))}
         {effectivenessList.every(item => item.list.length === 0) && (
-          <Typography variant="body2" color="text.secondary" textAlign="center">
+          <Typography variant="body2" sx={{ color: theme.palette.text.secondary }} textAlign="center">
             Selecciona al menos un tipo de enemigo para ver las eficacias.
           </Typography>
         )}
